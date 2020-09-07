@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.muciomgjr.learningmongo.domain.Post;
 import com.muciomgjr.learningmongo.domain.User;
 import com.muciomgjr.learningmongo.dto.AuthorDTO;
+import com.muciomgjr.learningmongo.dto.CommentDTO;
 import com.muciomgjr.learningmongo.repository.PostRepository;
 import com.muciomgjr.learningmongo.repository.UserRepository;
 
@@ -41,6 +42,12 @@ public class Instantiation implements CommandLineRunner{
 		Post post1 = new Post(null, sdf.parse("21/03/2019"), "Partiu viagem", "Vou sair para festa. Boa noite!", new AuthorDTO(anna));
 		Post post2 = new Post(null, sdf.parse("05/03/2020"), "Ajuda com Programação", "Alguém sabe tutoriais e livros sobre Angular com JAVA?", new AuthorDTO(anna));
 		
+		CommentDTO c1 = new CommentDTO("Boa viagem mano!", sdf.parse("15/03/2019"), new AuthorDTO(pedro));
+		CommentDTO c2 = new CommentDTO("Aproveite!", sdf.parse("22/03/2017"), new AuthorDTO(anna));
+		CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("27/05/2019"), new AuthorDTO(lucas));
+		
+		post1.getComments().addAll(Arrays.asList(c1, c2));
+		post2.getComments().addAll(Arrays.asList(c3));
 		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
